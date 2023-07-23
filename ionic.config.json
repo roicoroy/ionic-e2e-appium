@@ -1,0 +1,7 @@
+{
+  "name": "ionic-e2e-appium",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
