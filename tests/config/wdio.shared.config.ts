@@ -19,9 +19,7 @@ export const config: WebdriverIO.Config = {
       baseUrl: './',
     },
   },
-  baseUrl: process.env.SERVE_PORT
-    ? `http://localhost:${process.env.SERVE_PORT}`
-    : 'http://localhost:8100',
+  baseUrl: 'http://localhost:8100',
   //
   // ====================
   // Runner Configuration
@@ -51,7 +49,7 @@ export const config: WebdriverIO.Config = {
   // Define all options that are relevant for the WebdriverIO instance here
   //
   // Level of logging verbosity: trace | debug | info | warn | error | silent
-  logLevel: process.env.VERBOSE === 'true' ? 'debug' : 'error',
+  logLevel: 'error',
   // Set specific log levels per logger
   // loggers:
   // - webdriver, webdriverio
