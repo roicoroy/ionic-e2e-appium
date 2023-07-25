@@ -18,7 +18,8 @@ config.capabilities = [
     "appium:automationName": "XCUITest",
     // uk.goiaba.conference
     // The path to the app
-    'appium:app': '/Users/ricardobento/Documents/AUTOMATION/webdriverIO/ionic-e2e-appium/tests/apps/conference-Debug-iphonesimulator/App.app',
+    // 'appium:app': '/Users/ricardobento/Documents/AUTOMATION/webdriverIO/ionic-e2e-appium/tests/apps/conference-Debug-iphonesimulator/App.app',
+    'appium:app': '/Users/ricardobento/Documents/AUTOMATION/webdriverIO/ionic-e2e-appium/tests/apps/Debug-iphonesimulator/App.app',
     'appium:newCommandTimeout': 240,
     'appium:autoWebview': true,
     'appium:noReset': true,
