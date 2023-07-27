@@ -76,6 +76,7 @@
     "appium-xcuitest-driver": "^4.32.23",
     "chromedriver": "^96.0.0",
     "codelyzer": "^6.0.0",
+    "cypress": "^12.17.2",
     "eslint": "^7.26.0",
     "eslint-plugin-import": "2.22.1",
     "eslint-plugin-jsdoc": "30.7.6",
