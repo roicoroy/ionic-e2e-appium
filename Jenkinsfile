@@ -4,11 +4,11 @@ pipeline {
         skipStagesAfterUnstable()
     }
     stages {
-         stage('MVN') {
-            steps {
-                sh 'mvn --version'
-            }
-        }
+        //  stage('MVN') {
+        //     steps {
+        //         sh 'mvn --version'
+        //     }
+        // }
         stage('Ionic install and build') {
             steps {
                 sh '''
