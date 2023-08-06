@@ -4,13 +4,33 @@ pipeline {
         skipStagesAfterUnstable()
     }
     stages {
-        stage('Build Android') {
+        stage('Ionic install and build') {
             steps {
                 sh '''
                     cd $HOME/.jenkins/workspace/ionice-2e npm install
                     cd $HOME/.jenkins/workspace/ionice-2e npx ionic build
+                '''
+            }
+        }
+        stage('Android') {
+            steps {
+                sh '''
                     cd $HOME/.jenkins/workspace/ionice-2e npx cap add android
                     cd $HOME/.jenkins/workspace/ionice-2e npx cap add sync
+                '''
+            }
+        }
+        stage('iOS') {
+            steps {
+                sh '''
+                    cd $HOME/.jenkins/workspace/ionice-2e npx cap add ios
+                    cd $HOME/.jenkins/workspace/ionice-2e npx cap add sync
+                '''
+            }
+        }
+        stage('Tests') {
+            steps {
+                sh '''
                     cd $HOME/.jenkins/workspace/ionice-2e npm run test
                     cd $HOME/.jenkins/workspace/ionice-2e npm run cypress:run
                 '''
