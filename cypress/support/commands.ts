@@ -3,15 +3,15 @@
 // with Intellisense and code completion in your
 // IDE or Text Editor.
 // ***********************************************
-// declare namespace Cypress {
-//   interface Chainable<Subject = any> {
-//     customCommand(param: any): typeof customCommand;
-//   }
-// }
+declare namespace Cypress {
+    interface Chainable<Subject = any> {
+        customCommand(param: any): typeof customCommand;
+    }
+}
 //
-// function customCommand(param: any): void {
-//   console.warn(param);
-// }
+export function customCommand(param: any): void {
+    console.warn(param);
+}
 //
 // NOTE: You can use it like so:
 // Cypress.Commands.add('customCommand', customCommand);
@@ -28,7 +28,9 @@
 //
 //
 // -- This is a parent command --
-// Cypress.Commands.add("login", (email, password) => { ... })
+// Cypress.Commands.add('login', (email, password) => {
+//     console.log(email, password);
+// })
 //
 //
 // -- This is a child command --
