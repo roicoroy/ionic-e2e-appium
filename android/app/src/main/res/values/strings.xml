@@ -2,6 +2,6 @@
 <resources>
     <string name="app_name">ionic-e2e-appium</string>
     <string name="title_activity_main">ionic-e2e-appium</string>
-    <string name="package_name">io.ionic.starter</string>
-    <string name="custom_url_scheme">io.ionic.starter</string>
+    <string name="package_name">ionic.e2e.appium</string>
+    <string name="custom_url_scheme">ionic.e2e.appium</string>
 </resources>
