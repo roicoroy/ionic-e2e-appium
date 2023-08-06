@@ -11,6 +11,8 @@ pipeline {
                     cd /Users/ricardobento/.jenkins/workspace/ionice-2e npx ionic build
                     cd /Users/ricardobento/.jenkins/workspace/ionice-2e npx cap add android
                     cd /Users/ricardobento/.jenkins/workspace/ionice-2e npx cap add sync
+                    cd /Users/ricardobento/.jenkins/workspace/ionice-2e npm run test
+                    cd /Users/ricardobento/.jenkins/workspace/ionice-2e npm run cypress:run
                 '''
             }
         }
