@@ -1,7 +1,7 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'ionic.e2e.appium',
+  appId: 'io.ionic.starter',
   appName: 'ionic-e2e-appium',
   webDir: 'www',
   server: {
