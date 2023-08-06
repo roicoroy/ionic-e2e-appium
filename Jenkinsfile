@@ -8,9 +8,7 @@ pipeline {
             steps {
                 sh '''
                     cd /Users/ricardobento/.jenkins/workspace/ionice-2e npm install
-                    npx ionic build
-                    npx cap add android
-                    npx cap sync
+                    cd /Users/ricardobento/.jenkins/workspace/ionice-2e npx ionic build
                 '''
             }
         }
