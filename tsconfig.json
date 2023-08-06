@@ -18,11 +18,10 @@
     "target": "es2022",
     "module": "es2020",
     "lib": [
-      "es2018", 
+      "es2018",
       "dom"
     ],
     "useDefineForClassFields": false,
-
     "emitDecoratorMetadata": true,
     "skipLibCheck": true,
     "strictPropertyInitialization": false,
@@ -31,13 +30,19 @@
     "alwaysStrict": true,
     "strictNullChecks": true,
     "strictFunctionTypes": true,
-    "noImplicitReturns": false
-
+    "noImplicitReturns": false,
+    "esModuleInterop": true
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true
-  }
+  },
+  "exclude": [
+    "cypress.config.ts"
+  ],
+  "files": [
+    "cypress.config.ts"
+  ]
 }
