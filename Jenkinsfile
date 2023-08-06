@@ -7,7 +7,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh '''
-                    $HOME + /Users/ricardobento/.jenkins/workspace/ionice-2e npm install
+                    /Users/ricardobento/.jenkins/workspace/ionice-2e npm install
                 '''
             }
         }
