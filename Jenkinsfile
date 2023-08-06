@@ -6,10 +6,15 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'echo $JAVA_HOME'
+                sh '''
+                    npm install
+                    ionic build
+                    npx cap add android
+                    npx cap sync
+                '''
             }
         }
-        stage('Test'){
+        stage('Test') {
             steps {
                 sh 'echo $HOME'
             }
