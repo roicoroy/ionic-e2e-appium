@@ -40,9 +40,6 @@
     "strictTemplates": true
   },
   "exclude": [
-    "cypress.config.ts"
-  ],
-  "files": [
-    "cypress.config.ts"
+    "**/*.spec.ts"
   ]
 }
