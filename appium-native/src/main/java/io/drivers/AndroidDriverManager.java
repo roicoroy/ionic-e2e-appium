@@ -21,113 +21,120 @@ import org.apache.logging.log4j.Logger;
  * @since 10/13/2022
  **/
 public class AndroidDriverManager {
-    private static final String                     APP_PATH = String.valueOf (
-        Path.of (System.getProperty ("user.dir"), "/src/test/resources/app", "webdriverio-app.apk"));
-    private static final ThreadLocal<AndroidDriver> DRIVER   = new ThreadLocal<> ();
-    private static final Logger                     LOG      = LogManager.getLogger ("DriverManager.class");
+    private static final String APP_PATH = String.valueOf(
+            // Path.of (System.getProperty ("user.dir"), "/src/test/resources/app",
+            // "app-debug.apk")
+            Path.of("../android/app/build/outputs/apk/debug/app-debug.apk"));
+    private static final ThreadLocal<AndroidDriver> DRIVER = new ThreadLocal<>();
+    private static final Logger LOG = LogManager.getLogger("DriverManager.class");
 
-    public static void createAndroidDriver () {
-        startServer ("android");
-        //        setDriver (new AndroidDriver (getService ().getUrl (), geckoOptionsFirefox ()));
+    public static void createAndroidDriver() {
+        startServer("android");
+        // setDriver (new AndroidDriver (getService ().getUrl (), geckoOptionsFirefox
+        // ()));
         try {
-            setDriver (new AndroidDriver (new URL ("http://127.0.0.1:4723/wd/hub"), geckoOptionsFirefox ()));
+            setDriver(new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), uiAutomator2OptionsWdio()));
         } catch (final MalformedURLException e) {
-            throw new RuntimeException (e);
+            throw new RuntimeException(e);
         }
-        setupDriverTimeouts ();
+        setupDriverTimeouts();
     }
 
-    public static AndroidDriver getDriver () {
-        return AndroidDriverManager.DRIVER.get ();
+    public static AndroidDriver getDriver() {
+        return AndroidDriverManager.DRIVER.get();
     }
 
-    public static void quitSession () {
-        if (null != DRIVER.get ()) {
-            LOG.info ("Closing the driver...");
-            getDriver ().quit ();
-            DRIVER.remove ();
-            stopServer ();
+    public static void quitSession() {
+        if (null != DRIVER.get()) {
+            LOG.info("Closing the driver...");
+            getDriver().quit();
+            DRIVER.remove();
+            stopServer();
         }
     }
 
-    private static GeckoOptions geckoOptionsFirefox () {
-        final HashMap<String, Object> firefoxOptions = new HashMap<> ();
-        firefoxOptions.put ("androidPackage", "org.mozilla.firefox");
-        //firefoxOptions.put ("androidDeviceSerial", "EMULATOR32X1X12X0");
+    private static GeckoOptions geckoOptionsFirefox() {
+        final HashMap<String, Object> firefoxOptions = new HashMap<>();
+        firefoxOptions.put("androidPackage", "org.mozilla.firefox");
+        // firefoxOptions.put ("androidDeviceSerial", "EMULATOR32X1X12X0");
         final GeckoOptions geckoOptions;
-        geckoOptions = new GeckoOptions ().setPlatformName ("mac")
-            .setAutomationName (AutomationName.GECKO)
-            .setMozFirefoxOptions (firefoxOptions)
-            .setAndroidStorage ("app")
-            .setAcceptInsecureCerts (true)
-            .setNoReset (false);
+        geckoOptions = new GeckoOptions().setPlatformName("mac")
+                .setAutomationName(AutomationName.GECKO)
+                .setMozFirefoxOptions(firefoxOptions)
+                .setAndroidStorage("app")
+                .setAcceptInsecureCerts(true)
+                .setNoReset(false);
         return geckoOptions;
     }
 
-    private static void setDriver (final AndroidDriver driver) {
-        AndroidDriverManager.DRIVER.set (driver);
+    private static void setDriver(final AndroidDriver driver) {
+        AndroidDriverManager.DRIVER.set(driver);
     }
 
-    private static void setupDriverTimeouts () {
-        getDriver ().manage ()
-            .timeouts ()
-            .implicitlyWait (Duration.ofSeconds (5));
+    private static void setupDriverTimeouts() {
+        getDriver().manage()
+                .timeouts()
+                .implicitlyWait(Duration.ofSeconds(5));
     }
 
-    //    private static DesiredCapabilities setCapabilities() {
-    //        DesiredCapabilities capabilities = new DesiredCapabilities();
-    //        capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, Platform.ANDROID);
-    //        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Pixel_5_API_30");
-    //        capabilities.setCapability(MobileCapabilityType.APP, APP_PATH);
-    //        capabilities.setCapability("appPackage", "com.wdiodemoapp");
-    //        capabilities.setCapability("appActivity", "com.wdiodemoapp.MainActivity");
-    //        capabilities.setCapability("noReset", false);
-    //        capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.ANDROID_UIAUTOMATOR2);
-    //        return capabilities;
-    //    }
+    // private static DesiredCapabilities setCapabilities() {
+    // DesiredCapabilities capabilities = new DesiredCapabilities();
+    // capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME,
+    // Platform.ANDROID);
+    // capabilities.setCapability(MobileCapabilityType.DEVICE_NAME,
+    // "Pixel_5_API_30");
+    // capabilities.setCapability(MobileCapabilityType.APP, APP_PATH);
+    // capabilities.setCapability("appPackage", "com.wdiodemoapp");
+    // capabilities.setCapability("appActivity", "com.wdiodemoapp.MainActivity");
+    // capabilities.setCapability("noReset", false);
+    // capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME,
+    // AutomationName.ANDROID_UIAUTOMATOR2);
+    // return capabilities;
+    // }
 
-    private static UiAutomator2Options uiAutomator2OptionsChrome () {
+    private static UiAutomator2Options uiAutomator2OptionsChrome() {
 
         final UiAutomator2Options uiAutomator2Options;
-        uiAutomator2Options = new UiAutomator2Options ().setAvd ("Pixel_6_API_31")
-            .setAvdLaunchTimeout (Duration.ofSeconds (300))
-            .setAvdReadyTimeout (Duration.ofSeconds (100))
-            .setDeviceName ("Pixel_6_API_31")
-            .setAutomationName (AutomationName.ANDROID_UIAUTOMATOR2)
-            .withBrowserName ("chrome")
-            .setAutoGrantPermissions (true)
-            .setNoReset (false);
+        uiAutomator2Options = new UiAutomator2Options().setAvd("Pixel_6_API_31")
+                .setAvdLaunchTimeout(Duration.ofSeconds(300))
+                .setAvdReadyTimeout(Duration.ofSeconds(100))
+                .setDeviceName("Pixel_6_API_31")
+                .setAutomationName(AutomationName.ANDROID_UIAUTOMATOR2)
+                .withBrowserName("chrome")
+                .setAutoGrantPermissions(true)
+                .setNoReset(false);
 
         return uiAutomator2Options;
     }
 
-    private static UiAutomator2Options uiAutomator2OptionsProverbial () {
+    private static UiAutomator2Options uiAutomator2OptionsProverbial() {
 
         final UiAutomator2Options uiAutomator2Options;
-        uiAutomator2Options = new UiAutomator2Options ().setAvd ("Pixel_XL_API_33")
-            .setAvdLaunchTimeout (Duration.ofSeconds (300))
-            .setAvdReadyTimeout (Duration.ofSeconds (100))
-            .setDeviceName ("Pixel_XL_API_33")
-            .setAutomationName (AutomationName.ANDROID_UIAUTOMATOR2)
-            .setApp (APP_PATH)
-            .setAutoGrantPermissions (true)
-            .setAppPackage ("com.lambdatest.proverbial")
-            .setAppActivity ("com.lambdatest.proverbial.MainActivity")
-            .setNoReset (false);
+        uiAutomator2Options = new UiAutomator2Options().setAvd("Pixel_XL_API_33")
+                .setAvdLaunchTimeout(Duration.ofSeconds(300))
+                .setAvdReadyTimeout(Duration.ofSeconds(100))
+                .setDeviceName("Pixel_XL_API_33")
+                .setAutomationName(AutomationName.ANDROID_UIAUTOMATOR2)
+                .setApp(APP_PATH)
+                .setAutoGrantPermissions(true)
+                .setAppPackage("com.lambdatest.proverbial")
+                .setAppActivity("com.lambdatest.proverbial.MainActivity")
+                .setNoReset(false);
         return uiAutomator2Options;
     }
 
-    private static UiAutomator2Options uiAutomator2OptionsWdio () {
+    private static UiAutomator2Options uiAutomator2OptionsWdio() {
         final UiAutomator2Options uiAutomator2Options;
-        uiAutomator2Options = new UiAutomator2Options ().setAvd ("Pixel_XL_API_33")
-            .setAvdLaunchTimeout (Duration.ofSeconds (300))
-            .setAvdReadyTimeout (Duration.ofSeconds (100))
-            .setDeviceName ("Pixel_XL_API_33")
-            .setAutomationName (AutomationName.ANDROID_UIAUTOMATOR2)
-            .setApp (APP_PATH)
-            .setAppPackage ("com.wdiodemoapp")
-            .setAppActivity ("com.wdiodemoapp.MainActivity")
-            .setNoReset (false);
+        uiAutomator2Options = new UiAutomator2Options()
+                // .setAvd ("Pixel_3a_APL_33_arm64-v8a")
+                .setAvdLaunchTimeout(Duration.ofSeconds(300))
+                .setAvdReadyTimeout(Duration.ofSeconds(100))
+                .setDeviceName("Pixel_3a_APL_33_arm64-v8a")
+                .setAutomationName(AutomationName.ANDROID_UIAUTOMATOR2)
+                .setApp(APP_PATH)
+                .setAppPackage("ionic.e2e.appium")
+                .setAppActivity("ionic.e2e.appium.MainActivity")
+                .setNoReset(false);
         return uiAutomator2Options;
     }
 
