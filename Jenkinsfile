@@ -5,12 +5,6 @@ pipeline {
             }
     }
 
-    tools {
-        jdk 'jdk17'
-    }
-
-    options { buildDiscarder(logRotator(daysToKeepStr: '15')) }
-
     stages {
         stage('NPM Install') {
             steps {
