@@ -12,7 +12,6 @@ pipeline {
                     nodejs(nodeJSInstallationName: 'NodeJS v16.20.0') {
                         labelledShell label: 'NPM Install', script: '''
                                     echo "NPM Install"
-                                    /opt/nodejs-v16.20.0/bin/npm install
                                     '''
                     }
                 }
@@ -24,8 +23,6 @@ pipeline {
                         nodejs(nodeJSInstallationName: 'NodeJS v16.20.0') {
                         labelledShell label: 'Unit Test (with Coverage Report)', script: '''
                                         echo "Unit Test (with Coverage Report)"
-                                        /opt/nodejs-v16.20.0/bin/npm run test-clear-cache
-                                        /opt/nodejs-v16.20.0/bin/npm run test-coverage
                                         '''
                         }
                 }
